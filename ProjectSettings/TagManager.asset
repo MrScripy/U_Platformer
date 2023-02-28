@@ -41,11 +41,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Obstacles
+    uniqueID: 2807122989
+    locked: 0
   - name: EnvironmentObjects
     uniqueID: 4032103783
     locked: 0
   - name: Floor
     uniqueID: 3648940877
+    locked: 0
+  - name: Vehicles
+    uniqueID: 4112625671
     locked: 0
   - name: Characters
     uniqueID: 63463619
