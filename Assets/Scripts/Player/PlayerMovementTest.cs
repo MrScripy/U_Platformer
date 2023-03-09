@@ -23,7 +23,7 @@ public class PlayerMovementTest : MonoBehaviour
 
     void Update()
     {
-        
+
         CheckingGround();
         Jump();
     }
@@ -55,5 +55,5 @@ public class PlayerMovementTest : MonoBehaviour
         onGround = Physics2D.OverlapCircle(GroundCheck.position, checkRadius, Ground);
     }
 
-    
+
 }
