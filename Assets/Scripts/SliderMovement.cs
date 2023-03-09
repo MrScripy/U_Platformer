@@ -11,7 +11,6 @@ public class SliderMovement : MonoBehaviour
     void Start()
     {
         slider = GetComponent<SliderJoint2D>();
-
         speed = slider.motor;
     }
 
@@ -32,5 +31,14 @@ public class SliderMovement : MonoBehaviour
             speed.motorSpeed = -3;
             slider.motor = speed;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.gameObject.transform.parent = transform;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collision.gameObject.transform.parent = null;
     }
 }

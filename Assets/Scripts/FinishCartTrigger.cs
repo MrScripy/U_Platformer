@@ -1,28 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CartTest : MonoBehaviour
+public class FinishCartTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject triggerField;
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject cart;
+    [SerializeField] private Rigidbody2D cartRB;
     [SerializeField] private Rigidbody2D playerRB;
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            player.transform.parent = cart.transform;
+            playerRB.transform.parent = null;
+            playerRB.isKinematic = false;
             RotatePlayer();
-            playerRB.isKinematic = true;
-            triggerField.SetActive(false);
         }
     }
+
     private void RotatePlayer()
     {
         playerRB.freezeRotation = false;
         playerRB.transform.rotation = new Quaternion(0, 0, 0, 0);
         playerRB.freezeRotation = true;
     }
+
 }
+
