@@ -7,11 +7,13 @@ public class SliderMovement : MonoBehaviour
 {
     private SliderJoint2D slider;
     private JointMotor2D speed;
+    private Rigidbody2D platformRB;
 
     void Start()
     {
         slider = GetComponent<SliderJoint2D>();
         speed = slider.motor;
+        platformRB = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -35,10 +37,13 @@ public class SliderMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.transform.parent = transform;
+        if (collision.CompareTag("Player"))
+            collision.gameObject.transform.parent = transform;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        collision.gameObject.transform.parent = null;
+        if (collision.CompareTag("Player"))
+            collision.gameObject.transform.parent = null;
     }
+    
 }
