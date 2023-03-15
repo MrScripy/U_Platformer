@@ -1,20 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
-{   
+{
+    [SerializeField] private PlayerChar player;
     #region Speed
     [Header("Speed")]
     [SerializeField] float speed = 5f;
     [SerializeField] float fastSpeed = 8f;
-    private float realSpeed; 
+    private float realSpeed;
     private bool speedLock;
     #endregion
     #region Jump
     [Header("Jump")]
-    [SerializeField] float jumpForce = 350f;    
+    [SerializeField] float jumpForce = 350f;
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private float checkRadius = 0.5f;
     [SerializeField] private LayerMask Ground;
@@ -22,13 +21,21 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     #region Animation
     [Header("Animation")]
-    [SerializeField] Animator animator;
     private SpriteRenderer spriteR;
     private bool faceRight = true;
     #endregion
-
+    #region Attack
+    [Header("Attack")]
+    [SerializeField] private CharAttack attack;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float attackRate = 2f;
+    float nextAttackTime = 0f;
+    #endregion
     private Rigidbody2D rb;
     private float moveHorizontal;
+
 
 
     void Start()
@@ -37,8 +44,7 @@ public class PlayerMovement : MonoBehaviour
         spriteR = GetComponent<SpriteRenderer>();
         realSpeed = speed;
     }
-
-    void Update()
+    public void PlayerMove()
     {
         CheckingGround();
         MyInput();
@@ -46,33 +52,30 @@ public class PlayerMovement : MonoBehaviour
         Reflect();
         Run();
         Jump();
+        if (Time.time >= nextAttackTime)
+            Attack();
     }
-
-    public void MyInput()
+    private void MyInput()
     {
         moveHorizontal = Input.GetAxis("Horizontal");
     }
-
-    public void Walk()
+    private void Walk()
     {
         float move = Mathf.Abs(moveHorizontal);
-        animator.SetFloat("Speed", move);
+        player.CharacterAnimator.SetFloat("Speed", move);
         if (move > 0.01f)
             transform.position += new Vector3(moveHorizontal, 0f, 0f) * realSpeed * Time.deltaTime;
     }
-
-    public void Jump()
+    private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
             rb.AddForce(Vector2.up * jumpForce);
     }
-
-    public void CheckingGround()
+    private void CheckingGround()
     {
         onGround = Physics2D.OverlapCircle(GroundCheck.position, checkRadius, Ground);
-        animator.SetBool("OnGround", onGround);
+        player.CharacterAnimator.SetBool("OnGround", onGround);
     }
-
     private void Reflect()
     {
         if ((moveHorizontal > 0 && !faceRight) || (moveHorizontal < 0 && faceRight))
@@ -81,12 +84,11 @@ public class PlayerMovement : MonoBehaviour
             faceRight = !faceRight;
         }
     }
-
-    public void Run()
+    private void Run()
     {
-        if(Input.GetKey(KeyCode.LeftShift) && onGround)
+        if (Input.GetKey(KeyCode.LeftShift) && onGround)
         {
-            animator.SetBool("IsRunning", true);
+            player.CharacterAnimator.SetBool("IsRunning", true);
             realSpeed = fastSpeed;
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -94,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            animator.SetBool("IsRunning", false);
+            player.CharacterAnimator.SetBool("IsRunning", false);
             if (!speedLock)
                 realSpeed = speed;
             else if (speedLock && onGround)
@@ -103,4 +105,24 @@ public class PlayerMovement : MonoBehaviour
                 realSpeed = fastSpeed;
         }
     }
+    private void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            player.CharacterAnimator.SetTrigger("IsAttacking");
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+            foreach (var enemy in hitEnemies)
+                attack.PerformAttack(enemy.GetComponent<CharDamagable>());
+            nextAttackTime = Time.time + 1f / attackRate;
+        }
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
 }

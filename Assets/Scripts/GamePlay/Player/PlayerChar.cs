@@ -1,20 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerChar : Character
 {
-    //[SerializeField] private PlayerMovement movement;
-    //[SerializeField] private CharHealth health;
-    //[SerializeField] private CharAttack attack;
-    //[SerializeField] private CharDamagable damagable;
+    [SerializeField] private PlayerMovement move;
+    [SerializeField] private GameObject deadCanvas;
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(collision.CompareTag("Enemy") && Input.GetKeyDown(KeyCode.Mouse0))
-    //    {
-    //        attack.PerformAttack(collision.GetComponent<CharDamagable>());
-    //    }
-    //}
+    private void Start()
+    {
+        deadCanvas.SetActive(false);
+    }
+    void Update()
+    {
+        move.PlayerMove();
+    }
+    public override void Death()
+    {
+        Time.timeScale = 0;
+        deadCanvas.SetActive(true);
+    }
+    public void OnRestartButtonClick()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
+
 }

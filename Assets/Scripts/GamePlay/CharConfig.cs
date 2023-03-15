@@ -18,5 +18,4 @@ public class CharConfig : ScriptableObject
     public float Health => health;
     public float Damage => damage;
     //public float Speed => speed;
-
 }

@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class CharDamagable : MonoBehaviour
 {
+    [SerializeField] private Character character;
     [SerializeField] private CharHealth charHealth;
 
-   public void ApplyDamage(float damage)
+
+    public void ApplyDamage(float damage)
     {
         if (damage < 0)
             throw new ArgumentOutOfRangeException(nameof(damage));
@@ -13,10 +15,9 @@ public class CharDamagable : MonoBehaviour
         if (totalDamage < 0)
             throw new ArgumentOutOfRangeException(nameof(totalDamage));
         charHealth.Health -= totalDamage;
+        character.CharacterAnimator.SetTrigger("Damaged");
     }
 
-    protected virtual float ProcessDamage(float damage)
-    {
-        return damage;
-    }
+    protected virtual float ProcessDamage(float damage) => damage;
+
 }

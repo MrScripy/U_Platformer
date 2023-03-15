@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CharHealth : MonoBehaviour
 {
-    [SerializeField] private Character character;
+    [SerializeField] private Character character;    
     [SerializeField] private Slider slider;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
@@ -22,6 +22,8 @@ public class CharHealth : MonoBehaviour
         {
             _health = Mathf.Clamp(value, 0, MaxHealth);
             OnHealthChanged?.Invoke(_health);
+            if (_health == 0)
+                Die();
         }
     }
 
@@ -45,6 +47,12 @@ public class CharHealth : MonoBehaviour
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
-
+    private void Die()
+    {
+        // Die animation;
+        character.CharacterAnimator.SetBool("IsDead", true);
+        // Disable char
+        character.Death();        
+    }
     
 }
