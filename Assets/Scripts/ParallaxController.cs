@@ -60,4 +60,5 @@ public class ParallaxController : MonoBehaviour
             materials[i].SetTextureOffset("_MainTex", new Vector2(distance, 0) * speed);
         }
     }
+
 }
