@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CartTest : MonoBehaviour
+public class Cart : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {

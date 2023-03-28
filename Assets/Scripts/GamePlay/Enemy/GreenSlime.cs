@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
-
-public class Slime : Character
+[RequireComponent(typeof(CharAttack))]
+public class GreenSlime : Character
 {
     private CharAttack attack;
     [SerializeField] private float attackRate = 5f;
@@ -18,11 +19,10 @@ public class Slime : Character
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (Time.time >= nextAttackTime && collision.gameObject.tag == "Player")
+        if (Time.time >= nextAttackTime && collision.gameObject.CompareTag("Player"))
         {
             attack.PerformAttack(collision.gameObject.GetComponent<CharDamagable>());
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
-
 }
