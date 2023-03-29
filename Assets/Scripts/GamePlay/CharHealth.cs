@@ -4,18 +4,18 @@ using UnityEngine.UI;
 
 public class CharHealth : MonoBehaviour
 {
-    [SerializeField] private Character character;    
+    [SerializeField] protected Character character;    
     [SerializeField] private Slider slider;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
 
     public float MaxHealth { get; private set; }
 
-    private float _health;
+    protected float _health;
 
     public event Action<float> OnHealthChanged;
 
-    public float Health
+    public virtual float Health
     {
         get => _health;
         set
@@ -27,12 +27,12 @@ public class CharHealth : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected void Awake()
     {
         Initialize();
     }
 
-    private void Initialize()
+    protected void Initialize()
     {
         MaxHealth = character.Config.Health;
         _health = MaxHealth;
@@ -47,7 +47,7 @@ public class CharHealth : MonoBehaviour
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
-    private void Die()
+    protected void Die()
     {
         // Die animation;
         character.CharacterAnimator.SetBool("IsDead", true);

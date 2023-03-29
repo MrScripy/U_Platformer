@@ -29,8 +29,12 @@ public class CharAttack : MonoBehaviour
         Damage = character.Config.Damage;
     }
 
-    public void PerformAttack(CharDamagable damageRecipient)
+    public virtual void PerformAttack(CharDamagable damageRecipient)
     {
         damageRecipient.ApplyDamage(Damage);
+    }
+    public virtual void PerformAttack(CharDamagable damageRecipient, float extraDamage)
+    {
+        damageRecipient.ApplyDamage(Damage*extraDamage);
     }
 }

@@ -11,6 +11,6 @@ public abstract class Character : MonoBehaviour
     public Animator CharacterAnimator => animator;
     #endregion
     public CharConfig Config => charConfig;
-    public virtual void Death() => Debug.Log("Death!");
+    public abstract void Death();
 
 }
