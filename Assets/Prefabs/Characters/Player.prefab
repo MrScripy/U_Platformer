@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5123091791077338864}
   - component: {fileID: 5123091791077338865}
   - component: {fileID: 5123091791077338866}
+  - component: {fileID: 2815736486756895746}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -194,7 +195,6 @@ MonoBehaviour:
   charConfig: {fileID: 11400000, guid: d8c9f239ee7ba954cac60022f748dc23, type: 2}
   animator: {fileID: 5123091791077338857}
   move: {fileID: 5123091791077338863}
-  deadCanvas: {fileID: 0}
 --- !u!114 &5123091791077338863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +294,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 5123091791077338871}
+--- !u!114 &2815736486756895746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123091791077338859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a3d11be4700a641b917155e3242100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsManager: {fileID: 0}
+  particles: {fileID: 4414456799485010688, guid: 3da6269e03e08f54a9ff405c0e9f3d7d, type: 3}
 --- !u!1 &5123091791097688136
 GameObject:
   m_ObjectHideFlags: 0

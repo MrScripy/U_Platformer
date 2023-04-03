@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 
 public class PlayerChar : Character
 {
     [SerializeField] private PlayerMovement move;
-    [SerializeField] private GameObject deadCanvas;
+    [SerializeField] private GamePlayUIManager gameUI;
+
+    //[SerializeField] private GameObject deadPanel;
 
     private void Start()
     {
-        deadCanvas.SetActive(false);
+        //deadPanel.SetActive(false);
     }
     void Update()
     {
@@ -19,13 +21,7 @@ public class PlayerChar : Character
     }
     public override void Death()
     {
-        Time.timeScale = 0;
-        deadCanvas.SetActive(true);
-    }
-    public void OnRestartButtonClick()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
+        gameUI.PlayerDie();
     }
 
 }

@@ -20,6 +20,12 @@ public class CoinsManager : MonoBehaviour
     private int coins;
     private Vector3 targetPosition;
 
+    private void Awake()
+    {
+        targetPosition = target.position;
+        PrepareCoins();
+    }
+
     public int Coins
     {
         get => coins;
@@ -31,12 +37,6 @@ public class CoinsManager : MonoBehaviour
                 coinUIText.text = Coins.ToString();
             }
         }
-    }
-
-    private void Awake()
-    {
-        targetPosition = target.position;
-        PrepareCoins();
     }
 
     private void PrepareCoins()
@@ -61,20 +61,19 @@ public class CoinsManager : MonoBehaviour
                 GameObject coin = coinsQueue.Dequeue();
                 coin.SetActive(true);
 
-                coin.transform.position = CollectedCoinPosition + new Vector3 (Random.Range(-spread, spread), 0, 0);
+                coin.transform.position = CollectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0, 0);
 
                 float duration = Random.Range(minAnimDuration, maxAnimDuration);
                 coin.transform.DOMove(targetPosition, duration)
                     .SetEase(easeType)
-                    .OnComplete (() =>
-                    {
-                        coin.SetActive(false);
-                        coinsQueue.Enqueue(coin);
-
-                        Coins++;
-                    });
+                    .OnComplete(() =>
+                   {
+                       coin.SetActive(false);
+                       coinsQueue.Enqueue(coin);
+                       Coins++;
+                   });
             }
-        }       
+        }
     }
 
     public void AddCoin(Vector3 CollectedCoinPosition, CollectedItemsEnum item)
