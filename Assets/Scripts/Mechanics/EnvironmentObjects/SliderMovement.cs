@@ -7,13 +7,11 @@ public class SliderMovement : MonoBehaviour
 {
     private SliderJoint2D slider;
     private JointMotor2D speed;
-    private Rigidbody2D platformRB;
 
     void Start()
     {
         slider = GetComponent<SliderJoint2D>();
         speed = slider.motor;
-        platformRB = GetComponent<Rigidbody2D>();
     }
 
     void Update()

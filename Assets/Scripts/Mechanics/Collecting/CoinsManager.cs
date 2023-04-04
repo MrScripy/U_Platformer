@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 using DG.Tweening;
 
 public class CoinsManager : MonoBehaviour
@@ -9,7 +8,6 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private GameObject animatedCoinPref;
     [SerializeField] private int maxCoins;
-    Queue<GameObject> coinsQueue = new Queue<GameObject>();
 
     [Header("Animation settings")]
     [SerializeField] [Range(0.5f, 0.9f)] private float minAnimDuration;
@@ -23,7 +21,6 @@ public class CoinsManager : MonoBehaviour
     private void Awake()
     {
         targetPosition = target.position;
-        PrepareCoins();
     }
 
     public int Coins
@@ -39,40 +36,24 @@ public class CoinsManager : MonoBehaviour
         }
     }
 
-    private void PrepareCoins()
-    {
-        GameObject coin;
-        for (int i = 0; i < maxCoins; i++)
-        {
-            coin = Instantiate(animatedCoinPref);
-            coin.transform.parent = transform;
-            coin.SetActive(false);
-            coinsQueue.Enqueue(coin);
-        }
 
-    }
 
     private void Animate(Vector3 CollectedCoinPosition, CollectedItemsEnum item)
     {
         for (int i = 0; i < (int)item; i++)
         {
-            if (coinsQueue.Count > 0)
-            {
-                GameObject coin = coinsQueue.Dequeue();
-                coin.SetActive(true);
+            GameObject coin = Instantiate(animatedCoinPref, transform);
 
-                coin.transform.position = CollectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0, 0);
+            coin.transform.position = CollectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0, 0);
 
-                float duration = Random.Range(minAnimDuration, maxAnimDuration);
-                coin.transform.DOMove(targetPosition, duration)
-                    .SetEase(easeType)
-                    .OnComplete(() =>
-                   {
-                       coin.SetActive(false);
-                       coinsQueue.Enqueue(coin);
-                       Coins++;
-                   });
-            }
+            float duration = Random.Range(minAnimDuration, maxAnimDuration);
+            coin.transform.DOMove(targetPosition, duration)
+                .SetEase(easeType)
+                .OnComplete(() =>
+               {
+                   coin.SetActive(false);
+                   Coins++;
+               });
         }
     }
 

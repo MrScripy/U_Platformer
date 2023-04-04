@@ -1,11 +1,11 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharAttack))]
 public class OrangeSlime : Character
 {
     [Header("Attack")]
-    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private CharAttack charAttack;
+    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float attackRadius;
     [SerializeField] private Transform attackPoint;
     [Header("Move")]
@@ -17,12 +17,11 @@ public class OrangeSlime : Character
 
 
     private Vector3 target;
-    private CharAttack charAttack;
+
     private float nextAttackTime = 5f;
 
     private void Start()
     {
-        charAttack = GetComponent<CharAttack>();
         target = firstStopPoint.position;
     }
 
@@ -38,11 +37,12 @@ public class OrangeSlime : Character
         if (Time.time >= nextAttackTime)
         {
             CharacterAnimator.SetTrigger("IsAttacking");
-
             particle.Play();
-            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(transform.position, attackRadius, playerMask);
-            foreach (var player in hitPlayer)
-                charAttack.PerformAttack(player.GetComponent<CharDamagable>());
+
+            Collider2D hitPlayer = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
+            if (hitPlayer != null && hitPlayer.TryGetComponent<CharDamagable>(out CharDamagable playerDam))
+                charAttack.PerformAttack(playerDam);
+
             nextAttackTime = Time.time + Random.Range(3, 10);
         }
     }
@@ -62,6 +62,7 @@ public class OrangeSlime : Character
 
     public override void Death()
     {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
     }

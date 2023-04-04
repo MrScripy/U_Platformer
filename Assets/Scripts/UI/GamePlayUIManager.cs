@@ -14,7 +14,7 @@ public class GamePlayUIManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
 
     [Header("Collectable Objects"), Space]
-    [SerializeField] private Item[] collectableItems;
+    [SerializeField] private GameObject[] collectableItems;
     [SerializeField] private TMP_Text totalCoinsAmount;
     [SerializeField] private TMP_Text collectedCoinsAmount;
 
@@ -23,15 +23,16 @@ public class GamePlayUIManager : MonoBehaviour
 
     private void Start()
     {
+        allCoins = 0;
         CheckPanels();
         CountAllCoins();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(isPaused)
+            if (isPaused)
             {
                 Resume();
             }
@@ -51,9 +52,13 @@ public class GamePlayUIManager : MonoBehaviour
 
     private void CountAllCoins()
     {
-        for (int i = 0; i < collectableItems.Length; i++)
+        if (collectableItems != null)
         {
-            allCoins += (int)collectableItems[i].ItemType;
+            for (int i = 0; i < collectableItems.Length; i++)
+            {
+                if (collectableItems[i].TryGetComponent<Item>(out Item item))
+                    allCoins += (int)item.ItemType;
+            }
         }
     }
 
@@ -94,8 +99,8 @@ public class GamePlayUIManager : MonoBehaviour
     {
         Time.timeScale = 0;
         winPanel.SetActive(true);
+        totalCoinsAmount.text = allCoins.ToString();
         collectedCoinsAmount.text = coinsAmount.ToString();
-
     }
 
     private void Resume()
