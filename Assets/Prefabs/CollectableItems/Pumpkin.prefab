@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7482576996703429120}
   - component: {fileID: 7482576996703429247}
   - component: {fileID: 4543667075002706102}
+  - component: {fileID: 2343753989623936234}
   m_Layer: 0
   m_Name: Pumpkin
   m_TagString: CollectableItem
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7482576996703429245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.34, y: -2.63, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,3 +125,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88751f1cf66ed254ba01e59c48c30605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &2343753989623936234
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7482576996703429245}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8155d6651e7dfca43b7d931d64c8bb6b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

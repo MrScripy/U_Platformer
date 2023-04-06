@@ -16,6 +16,7 @@ public class GreenSlime : Character
     }
     public override void Death()
     {
+        coinItem.transform.position = transform.position + Vector3.up;
         coinItem.SetActive(true);
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().enabled = false;
