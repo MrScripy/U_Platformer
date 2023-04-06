@@ -4,7 +4,7 @@ public class ParallaxController : MonoBehaviour
 {
     private new Transform camera; // main camera
     private Vector3 cameraStartPos;
-    private float distance; // distance between the canera start position and its current position
+    private float distance; // distance between the camera start position and its current position
 
     private GameObject[] backgrounds;
     private Material[] materials;
@@ -52,7 +52,7 @@ public class ParallaxController : MonoBehaviour
     private void LateUpdate()
     {
         distance = camera.position.x - cameraStartPos.x;
-        transform.position = new Vector3(camera.position.x, 0, 0);
+        transform.position = new Vector3(camera.position.x, transform.position.y, 0);
 
         for (int i = 0; i < backCount; i++)
         {
