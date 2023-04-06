@@ -9,4 +9,8 @@ public class EndOfExplosion : MonoBehaviour
     {
         Destroy(explosion);
     }
+    public void DisableForceMagnitude()
+    {
+        GetComponent<PointEffector2D>().forceMagnitude = 0;
+    }
 }

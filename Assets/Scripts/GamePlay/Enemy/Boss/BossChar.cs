@@ -8,6 +8,7 @@ public class BossChar : Character
     [SerializeField] private float attackRange = 3f;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] Transform attackPoint;
+    [SerializeField] private GameObject finishPortal;
 
 
     private Collider2D colInfo;
@@ -45,7 +46,7 @@ public class BossChar : Character
 
     public override void Death()
     {
-        Debug.Log("Open the portal");
+        finishPortal.SetActive(true);
     }
 
     public void BossDeathAnimationEvent()
