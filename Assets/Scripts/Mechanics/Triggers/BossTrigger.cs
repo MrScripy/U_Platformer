@@ -7,6 +7,7 @@ public class BossTrigger : MonoBehaviour
     private void Start()
     {
         finishPortal.SetActive(false);
+        boss.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
