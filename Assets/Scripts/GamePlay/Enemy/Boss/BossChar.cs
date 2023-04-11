@@ -47,10 +47,12 @@ public class BossChar : Character
     public override void Death()
     {
         finishPortal.SetActive(true);
+
     }
 
     public void BossDeathAnimationEvent()
     {
         this.gameObject.SetActive(false);
     }
+
 }

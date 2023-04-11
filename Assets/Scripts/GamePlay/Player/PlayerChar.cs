@@ -9,7 +9,8 @@ public class PlayerChar : Character
 
     void Update()
     {
-        move.PlayerMove();
+        if (!BossTrigger.IsCutsceneOn)
+            move.PlayerMove();
     }
 
     public override void Death()
