@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// class for enemy that opens the finish portal after its death
 public class ExitOrangeSlime : OrangeSlime
 {
     [Header("Exit")]

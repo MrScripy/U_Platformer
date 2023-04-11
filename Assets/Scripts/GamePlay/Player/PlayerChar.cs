@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-
 public class PlayerChar : Character
 {
     [SerializeField] private PlayerMovement move;

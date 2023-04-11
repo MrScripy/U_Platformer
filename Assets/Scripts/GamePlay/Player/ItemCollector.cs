@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
@@ -15,6 +13,5 @@ public class ItemCollector : MonoBehaviour
             Destroy(collision.gameObject);
             Instantiate(particles, collision.transform.position, Quaternion.identity);
         }
-            
     }
 }

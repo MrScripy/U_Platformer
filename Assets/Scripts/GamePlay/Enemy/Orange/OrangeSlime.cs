@@ -31,7 +31,6 @@ public class OrangeSlime : Character
         Move();
     }
 
-
     private void Attack()
     {
         if (Time.time >= nextAttackTime)
@@ -66,6 +65,7 @@ public class OrangeSlime : Character
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
     }
+
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

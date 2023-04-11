@@ -6,7 +6,6 @@ public class CharDamagable : MonoBehaviour
     [SerializeField] private Character character;
     [SerializeField] private CharHealth charHealth;
 
-
     public void ApplyDamage(float damage)
     {
         if (damage < 0)
@@ -19,5 +18,4 @@ public class CharDamagable : MonoBehaviour
     }
 
     protected virtual float ProcessDamage(float damage) => damage;
-
 }

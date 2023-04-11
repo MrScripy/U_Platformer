@@ -36,8 +36,6 @@ public class CoinsManager : MonoBehaviour
         }
     }
 
-
-
     private void Animate(Vector3 CollectedCoinPosition, CollectedItemsEnum item)
     {
         for (int i = 0; i < (int)item; i++)

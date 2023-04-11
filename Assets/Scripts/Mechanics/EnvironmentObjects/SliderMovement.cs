@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SliderJoint2D))]
@@ -43,5 +41,5 @@ public class SliderMovement : MonoBehaviour
         if (collision.CompareTag("Player"))
             collision.gameObject.transform.parent = null;
     }
-    
+
 }

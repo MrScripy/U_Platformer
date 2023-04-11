@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -42,6 +41,7 @@ public class GamePlayUIManager : MonoBehaviour
             }
         }
     }
+
     private void CheckPanels()
     {
         gamePanel.SetActive(true);
@@ -67,6 +67,7 @@ public class GamePlayUIManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public void OnMainMenuButtonClick()
     {
         Time.timeScale = 1;
@@ -86,6 +87,7 @@ public class GamePlayUIManager : MonoBehaviour
 
     public void OnNextLevelButtonClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -109,6 +111,7 @@ public class GamePlayUIManager : MonoBehaviour
         pausePanel.SetActive(false);
         isPaused = false;
     }
+
     private void Pause()
     {
         Time.timeScale = 0f;

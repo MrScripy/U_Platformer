@@ -17,6 +17,7 @@ public class BossTrigger : MonoBehaviour
         finishPortal.SetActive(false);
         boss.SetActive(false);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -34,6 +35,5 @@ public class BossTrigger : MonoBehaviour
         camAnim.SetBool("FirstCutscene", false);
         this.gameObject.SetActive(false);
     }
-
 
 }

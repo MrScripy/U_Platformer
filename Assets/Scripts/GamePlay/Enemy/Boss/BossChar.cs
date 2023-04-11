@@ -10,7 +10,6 @@ public class BossChar : Character
     [SerializeField] Transform attackPoint;
     [SerializeField] private GameObject finishPortal;
 
-
     private Collider2D colInfo;
 
     public void LookAtPlayer()
@@ -47,9 +46,11 @@ public class BossChar : Character
     public override void Death()
     {
         finishPortal.SetActive(true);
-
     }
 
+    /// <summary>
+    /// method for animation event of death
+    /// </summary>
     public void BossDeathAnimationEvent()
     {
         this.gameObject.SetActive(false);

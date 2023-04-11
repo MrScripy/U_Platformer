@@ -1,5 +1,4 @@
 
-
 public class BossHealth : CharHealth
 {
     private bool isInvulnerable = false;
@@ -8,8 +7,8 @@ public class BossHealth : CharHealth
         get => isInvulnerable;
         set => isInvulnerable = value;
     }
-    public override float Health 
-    { 
+    public override float Health
+    {
         get => base.Health;
         set
         {
@@ -19,7 +18,6 @@ public class BossHealth : CharHealth
             Check();
         }
     }
-
     private void Check()
     {
         if (Health == (character.Config.Health / 2))

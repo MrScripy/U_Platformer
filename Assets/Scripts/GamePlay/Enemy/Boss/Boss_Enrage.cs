@@ -5,7 +5,7 @@ public class Boss_Enrage : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<BossHealth>().IsInvulnerable = true;
+        animator.GetComponent<BossHealth>().IsInvulnerable = true; // change condition to play the animation of changing statement of boss enemy
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

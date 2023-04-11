@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+
 [RequireComponent(typeof(CharAttack))]
 public class GreenSlime : Character
 {
@@ -16,8 +16,10 @@ public class GreenSlime : Character
     }
     public override void Death()
     {
+        // make coin visible
         coinItem.transform.position = transform.position + Vector3.up;
         coinItem.SetActive(true);
+        // make enemy interactable
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;

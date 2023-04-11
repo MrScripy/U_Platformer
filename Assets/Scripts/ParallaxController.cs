@@ -21,7 +21,7 @@ public class ParallaxController : MonoBehaviour
         camera = Camera.main.transform;
         cameraStartPos = camera.position;
 
-        backCount = transform.childCount;
+        backCount = transform.childCount; // find parallax layers count
         materials = new Material[backCount];
         backSpeed = new float[backCount];
         backgrounds = new GameObject[backCount];
@@ -33,6 +33,19 @@ public class ParallaxController : MonoBehaviour
         }
         BackSpeedCalculate(backCount);
     }
+
+    private void LateUpdate()
+    {
+        distance = camera.position.x - cameraStartPos.x;
+        transform.position = new Vector3(camera.position.x, transform.position.y, 0);
+
+        for (int i = 0; i < backCount; i++)
+        {
+            float speed = backSpeed[i] * parallaxSpeed;
+            materials[i].SetTextureOffset("_MainTex", new Vector2(distance, 0) * speed);
+        }
+    }
+
     private void BackSpeedCalculate(int backCount)
     {
         for (int i = 0; i < backCount; i++) // find the farthest background
@@ -48,17 +61,4 @@ public class ParallaxController : MonoBehaviour
             backSpeed[i] = 1 - (backgrounds[i].transform.position.z - camera.position.z) / farthestBack;
         }
     }
-
-    private void LateUpdate()
-    {
-        distance = camera.position.x - cameraStartPos.x;
-        transform.position = new Vector3(camera.position.x, transform.position.y, 0);
-
-        for (int i = 0; i < backCount; i++)
-        {
-            float speed = backSpeed[i] * parallaxSpeed;
-            materials[i].SetTextureOffset("_MainTex", new Vector2(distance, 0) * speed);
-        }
-    }
-
 }
